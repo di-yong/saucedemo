@@ -2,7 +2,7 @@ Feature: Swag Labs shopping center - end to end
   Scenario: End to end testing
     Given User navigates to the login page
     When User enter the username and password
-    Then User clicks the login button
+    And User clicks the login button
     When User navigates to the Products page
     Then User add some items to the cart
     Then User click cart button to Cart page
