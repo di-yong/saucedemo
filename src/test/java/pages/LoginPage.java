@@ -1,12 +1,15 @@
 package pages;
 
+import io.cucumber.java.an.E;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import utility.ElementHelper;
 
 import static org.testng.AssertJUnit.assertEquals;
 
 public class LoginPage {
   private final WebDriver driver;
+  private final ElementHelper eh;
 
   private final By Txt_title = By.xpath("//*[@id='root']/div/div[1]");
   private final By TxtBox_username = By.xpath("//*[@id='user-name']");
@@ -15,11 +18,13 @@ public class LoginPage {
 
   public LoginPage(WebDriver driver) {
     this.driver = driver;
+    this.eh = new ElementHelper(driver);
   }
 
   public void verifyTitle() {
-    assertEquals("Swag Labs", driver.findElement(Txt_title).getText());
+    assertEquals("Swag Labs", eh.getElementTextWhenVisible(Txt_title, 10));
   }
+
   public void enterUsername() {
     driver.findElement(TxtBox_username).sendKeys("standard_user");
   }

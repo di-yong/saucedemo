@@ -3,14 +3,18 @@ package stepDefinition;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.WebElement;
 import pages.LoginPage;
+import utility.ElementHelper;
 import utility.Hooks;
 
 public class LoginPageSteps {
   private final LoginPage loginPage;
 
+
   public LoginPageSteps() {
     loginPage = new LoginPage(Hooks.getDriver());
+
   }
 
   @Given("User navigates to the login page")
