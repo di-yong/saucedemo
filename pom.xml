@@ -63,7 +63,7 @@
     <artifactId>webdrivermanager</artifactId>
     <version>5.9.2</version>
   </dependency>
-  </dependencies>
+</dependencies>
   <properties>
     <maven.compiler.source>21</maven.compiler.source>
     <maven.compiler.target>21</maven.compiler.target>

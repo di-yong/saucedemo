@@ -3,18 +3,14 @@ package stepDefinition;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
-import org.openqa.selenium.WebElement;
 import pages.LoginPage;
-import utility.ElementHelper;
 import utility.Hooks;
 
 public class LoginPageSteps {
   private final LoginPage loginPage;
 
-
   public LoginPageSteps() {
     loginPage = new LoginPage(Hooks.getDriver());
-
   }
 
   @Given("User navigates to the login page")
@@ -22,15 +18,10 @@ public class LoginPageSteps {
     Hooks.getDriver().get("https://www.saucedemo.com/");
   }
 
-  @When("User enter the username and password")
-  public void user_enter_username_and_passowrd(){
+  @When("User enter the username {string} and password {string}")
+  public void user_enter_username_and_password(String username, String password){
     loginPage.verifyTitle();
-    loginPage.enterUsername();
-    loginPage.enterPassword();
+    loginPage.login(username, password);
   }
 
-  @And("User clicks the login button")
-  public void user_clicks_login_button(){
-    loginPage.clickLoginButton();
-  }
 }

@@ -1,28 +1,46 @@
 package stepDefinition;
 
+import context.TestContext;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import pages.ProductsPage;
 import utility.Hooks;
 
+import java.util.List;
+import java.util.Map;
+
 
 public class ProductPageSteps {
   private final ProductsPage productsPage;
 
-
   public ProductPageSteps() {
     productsPage = new ProductsPage(Hooks.getDriver());
+
+    TestContext.resetTotalPrice();
   }
 
-  @When("User navigates to the Products page")
+  @And("User navigates to the Products page")
   public void user_navigates_products_page(){
     productsPage.verifyTitle();
   }
 
   @And("User add some items to the cart")
-  public void user_add_some_items_to_the_cart(){
-    productsPage.clickAddToCart();
+  public void user_add_some_items_to_the_cart(DataTable dataTable){
+    List<Map<String, String>> items = dataTable.asMaps(String.class, String.class);
+
+    for (Map<String, String> item : items) {
+      String itemName = item.get("Item Name");
+      String price = item.get("Price");
+      String addToCart = item.get("Add To Cart?");
+
+      if (addToCart.equalsIgnoreCase("Y")) {
+        productsPage.clickAddToCart(itemName);
+
+        TestContext.addToTotalPrice(Double.parseDouble(price.replace("$", "")));
+      }
+    }
   }
 
   @Then("User click cart button to Cart page")

@@ -25,15 +25,21 @@ public class LoginPage {
     assertEquals("Swag Labs", eh.getElementTextWhenVisible(Txt_title, 10));
   }
 
-  public void enterUsername() {
-    driver.findElement(TxtBox_username).sendKeys("standard_user");
+  public void enterUsername(String username) {
+    driver.findElement(TxtBox_username).sendKeys(username);
   }
 
-  public void enterPassword() {
-    driver.findElement(TxtBox_password).sendKeys("secret_sauce");
+  public void enterPassword(String password) {
+    driver.findElement(TxtBox_password).sendKeys(password);
   }
 
   public void clickLoginButton() {
     driver.findElement(Btn_login).click();
+  }
+
+  public void login(String username, String password) {
+    enterUsername(username);
+    enterPassword(password);
+    clickLoginButton();
   }
 }
