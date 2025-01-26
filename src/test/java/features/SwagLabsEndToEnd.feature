@@ -5,12 +5,12 @@ Feature: Swag Labs shopping center - end to end
     And User navigates to the Products page
     And User add some items to the cart
       | Item Name                         | Price  | Add To Cart? |
-      | Sauce Labs Backpack               | $29.99 | N            |
+      | Sauce Labs Backpack               | $29.99 | Y            |
       | Sauce Labs Bike Light             | $9.99  | Y            |
-      | Sauce Labs Bolt T-Shirt           | $15.99 | N            |
-      | Sauce Labs Fleece Jacket          | $49.99 | N            |
-      | Sauce Labs Onesie                 | $7.99  | N            |
-      | Test.allTheThings() T-Shirt (Red) | $15.99 | N            |
+      | Sauce Labs Bolt T-Shirt           | $15.99 | Y            |
+      | Sauce Labs Fleece Jacket          | $49.99 | Y            |
+      | Sauce Labs Onesie                 | $7.99  | Y            |
+      | Test.allTheThings() T-Shirt (Red) | $15.99 | Y            |
     Then User click cart button to Cart page
     Then User click Checkout button
     And User enter the personal information and click Continue button

@@ -1,17 +1,17 @@
 package context;
 
 public class TestContext {
-  public static double totalPrice = 0.0;
+  private static final ThreadLocal<Double> totalPrice = ThreadLocal.withInitial(() -> 0.0);
 
   public static double getTotalPrice() {
-    return totalPrice;
+    return totalPrice.get();
   }
 
   public static void addToTotalPrice(double price) {
-    totalPrice += price;
+    totalPrice.set(totalPrice.get() + price);
   }
 
   public static void resetTotalPrice() {
-    totalPrice = 0.0;
+    totalPrice.set(0.0);
   }
 }

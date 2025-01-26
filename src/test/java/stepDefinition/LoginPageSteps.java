@@ -23,5 +23,4 @@ public class LoginPageSteps {
     loginPage.verifyTitle();
     loginPage.login(username, password);
   }
-
 }

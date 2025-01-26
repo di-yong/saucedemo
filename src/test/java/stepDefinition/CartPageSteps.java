@@ -13,9 +13,8 @@ public class CartPageSteps {
   }
 
   @Then("User click Checkout button")
-  public void user_navigates_products_page(){
+  public void user_clicks_checkout_button(){
     cartPage.verifyTitle();
     cartPage.clickCheckout();
   }
-
 }

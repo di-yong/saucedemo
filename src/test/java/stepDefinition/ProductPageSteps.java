@@ -4,9 +4,9 @@ import context.TestContext;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
 import pages.ProductsPage;
 import utility.Hooks;
+import utility.ProductHelper;
 
 import java.util.List;
 import java.util.Map;
@@ -33,11 +33,10 @@ public class ProductPageSteps {
     for (Map<String, String> item : items) {
       String itemName = item.get("Item Name");
       String price = item.get("Price");
-      String addToCart = item.get("Add To Cart?");
+      ProductHelper.AddToCartOption addToCart = ProductHelper.AddToCartOption.fromString(item.get("Add To Cart?"));
 
-      if (addToCart.equalsIgnoreCase("Y")) {
+      if (addToCart == ProductHelper.AddToCartOption.YES) {
         productsPage.clickAddToCart(itemName);
-
         TestContext.addToTotalPrice(Double.parseDouble(price.replace("$", "")));
       }
     }

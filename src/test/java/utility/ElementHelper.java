@@ -28,4 +28,22 @@ public class ElementHelper {
       return "";
     }
   }
+
+  public boolean isElementPresent(By locator) {
+    try {
+      driver.findElement(locator);
+      return true;
+    } catch (Exception e) {
+      return false;
+    }
+  }
+
+  public void waitForElementClickable(By locator, int timeoutInSeconds) {
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
+    try {
+      wait.until(ExpectedConditions.elementToBeClickable(locator));
+    } catch (TimeoutException e) {
+      throw new TimeoutException("Element was not clickable within " + timeoutInSeconds + " seconds: " + locator);
+    }
+  }
 }

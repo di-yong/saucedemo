@@ -2,15 +2,11 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import utility.ElementHelper;
-import utility.Hooks;
 import utility.RandomGenerator;
 
-import static org.testng.AssertJUnit.assertEquals;
-
-public class CheckoutPage {
-  private final WebDriver driver;
-  private final ElementHelper eh;
+public class CheckoutPage extends BasePage {
+  private static final String PAGE_TITLE = "Checkout: Your Information";
+  private static final String ORDER_COMPLETED = "Thank you for your order!";
 
   private final By Txt_title = By.xpath("//*[@id='header_container']/div[2]/span");
   private final By TxtBox_FirstName = By.xpath("//*[@id='first-name']");
@@ -19,37 +15,32 @@ public class CheckoutPage {
   private final By Btn_Continue = By.xpath("//*[@id='continue']");
   private final By TxtBox_PriceTotal = By.xpath("//*[@id='checkout_summary_container']/div/div[2]/div[6]");
   private final By Txt_OrderCompletedInfo = By.xpath("//*[@id='checkout_complete_container']/h2");
-
   private final By Btn_Finish = By.xpath("//*[@id='finish']");
 
   public CheckoutPage(WebDriver driver) {
-    this.driver = driver;
-    this.eh = new ElementHelper(driver);
+    super(driver);
   }
 
   public void verifyTitle() {
-    assertEquals("Checkout: Your Information", eh.getElementTextWhenVisible(Txt_title, 10));
+    super.verifyTitle(PAGE_TITLE, Txt_title, 10);
   }
 
   public void enterPersonalInfo() {
-    driver.findElement(TxtBox_FirstName)
-      .sendKeys(RandomGenerator.getRandomString(5, RandomGenerator.StringType.ALPHABETIC));
-    driver.findElement(TxtBox_LastName)
-      .sendKeys(RandomGenerator.getRandomString(5, RandomGenerator.StringType.ALPHABETIC));
-    driver.findElement(TxtBox_PostalCode)
-      .sendKeys(RandomGenerator.getRandomString(4, RandomGenerator.StringType.NUMERIC));
+    super.enterText(TxtBox_FirstName, RandomGenerator.getRandomString(5, RandomGenerator.StringType.ALPHABETIC));
+    super.enterText(TxtBox_LastName, RandomGenerator.getRandomString(5, RandomGenerator.StringType.ALPHABETIC));
+    super.enterText(TxtBox_PostalCode, RandomGenerator.getRandomString(5, RandomGenerator.StringType.NUMERIC));
   }
 
   public void clickContinue() {
-    driver.findElement(Btn_Continue).click();
+    super.click(Btn_Continue);
   }
 
   public void clickFinish() {
-    driver.findElement(Btn_Finish).click();
+    super.click(Btn_Finish);
   }
 
   public void verifyOrderCompleteInfo() {
-    assertEquals("Thank you for your order!", eh.getElementTextWhenVisible(Txt_OrderCompletedInfo, 10));
+    super.verifyTitle(ORDER_COMPLETED, Txt_OrderCompletedInfo, 10);
   }
 
   public String getTotalPrice() {

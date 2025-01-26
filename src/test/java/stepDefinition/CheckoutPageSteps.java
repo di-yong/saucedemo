@@ -12,7 +12,6 @@ import java.math.BigDecimal;
 public class CheckoutPageSteps {
   private final CheckoutPage checkoutPage;
 
-
   public CheckoutPageSteps() {
     checkoutPage = new CheckoutPage(Hooks.getDriver());
   }
@@ -29,7 +28,6 @@ public class CheckoutPageSteps {
     String actualTotalPrice = checkoutPage.getTotalPrice();
 
     BigDecimal expectedTotalPrice = new BigDecimal(TestContext.getTotalPrice()).setScale(2, BigDecimal.ROUND_HALF_UP);
-
     BigDecimal actualTotalPriceDecimal = new BigDecimal(actualTotalPrice.replace("$", "")).setScale(2, BigDecimal.ROUND_HALF_UP);
 
     assert expectedTotalPrice.equals(actualTotalPriceDecimal) :
@@ -44,8 +42,6 @@ public class CheckoutPageSteps {
   @And("User validate the order is completed")
   public void user_validate_order_is_completed(){
     checkoutPage.verifyOrderCompleteInfo();
-
   }
-
 }
 
